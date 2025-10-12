@@ -6,10 +6,7 @@ hs_err_pid*
 
 # SBT / Scala build artifacts
 target/
-project/target/
-project/project/
-project/.history/
-project/.bloop/
+project/
 .metals/
 .idea/
 *.iml
