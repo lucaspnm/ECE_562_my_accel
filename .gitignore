@@ -3,3 +3,21 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# SBT / Scala build artifacts
+target/
+project/target/
+project/project/
+project/.history/
+project/.bloop/
+.metals/
+.idea/
+*.iml
+*.class
+*.log
+*.out
+
+# Verilator / Chipyard build outputs
+sims/
+generated-src/
+.vscode/
