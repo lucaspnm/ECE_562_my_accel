@@ -1,20 +1,13 @@
-// File: src/main/scala/Configs.scala
 package chipyard
 
-import freechips.rocketchip.config._
-import freechips.rocketchip.tile._         // OpcodeSet
-import freechips.rocketchip.subsystem._    // BuildRoCC
-import freechips.rocketchip.diplomacy._    // LazyModule
-import reverbrocc._                        // ReverbRoCC
+import freechips.rocketchip.tile._
+import freechips.rocketchip.subsystem._
+import freechips.rocketchip.diplomacy._
+import org.chipsalliance.cde.config.{Config, Parameters}
+import reverbrocc._
 
-/** Adds the ReverbRoCC to the Rocket tile(s). */
-class WithReverbRoCC extends Config((site, here, up) => {
-  case BuildRoCC => up(BuildRoCC, site) ++ Seq({ p: Parameters =>
-    LazyModule(new ReverbRoCC(OpcodeSet.custom0)(p))
-  })
+
+class WithCustomAccelerator extends Config((site, here, up) => {
+  case BuildRoCC => Seq((p: Parameters) => LazyModule(
+    new CustomAccelerator(OpcodeSet.custom0 | OpcodeSet.custom1)(p)))
 })
-
-/** Final SoC configuration you pass to `make CONFIG=...` */
-class RocketWithReverbRoCCConfig extends Config(
-  new WithReverbRoCC ++ new RocketConfig
-)
