@@ -2,12 +2,15 @@
 
 To run this code in a docker container follow these steps:
 
-1. Set-up your env with the following command:
+1. Set up your env with the following commands:
 $ cd /workspace/chipyard
 $ source env.sh
 
 2. Transfer schroeder_test.c to /workspace/chipyard/tests
-FIXME: add target/dump file to CMakeLists.txt
+3. Update CMakelists.txt in the tests/ folder to add executables and dump files:
+add_executable(schroeder_test schroeder_test.c) # Insert this command to line 90
+add_dump_target(schroeder_test) # Insert this command to line 129
+
 3. Execute the following commands:
 $ cd /workspace/chipyard/tests
 $ mkdir build && cd build
@@ -22,7 +25,7 @@ $ cd /workspace/chipyard/sims/verilator
 $ make CONFIG=SchroederConfig
 
 To test the workload:
-./simulator-chipyard.harness-SchroederConfig /workspace/chipyard/tests/schroederRoCC.riscv
+./simulator-chipyard.harness-SchroederT /workspace/chipyard/tests/schroeder_test.riscv
 
 TRASH:
 
